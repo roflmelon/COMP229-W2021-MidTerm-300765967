@@ -1,3 +1,6 @@
+// COMP229-F2020-MIDTERM-300765967
+// Harry Zhou
+
 // moddules for node and express
 let createError = require('http-errors');
 let express = require('express');

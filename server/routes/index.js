@@ -1,3 +1,6 @@
+// COMP229-F2020-MIDTERM-300765967
+// Harry Zhou
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -9,7 +12,7 @@ let book = require('../models/books');
 /* GET home page. wildcard */
 router.get('/', (req, res, next) => {
   res.render('content/index', {
-    title: 'Home',
+    title: 'My Favourite Books',
     books: ''
    });
 });

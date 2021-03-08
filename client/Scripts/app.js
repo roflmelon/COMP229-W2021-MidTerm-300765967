@@ -1,4 +1,6 @@
 /* custom JS goes here */
+// COMP229-F2020-MIDTERM-300765967
+// Harry Zhou
 
 /* pagination code from http://www.bootply.com/lxa0FF9yhw */
 $.fn.pageMe = function(opts){

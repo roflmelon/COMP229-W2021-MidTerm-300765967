@@ -38,7 +38,7 @@ router.post('/add', (req, res, next) => {
     "Price": req.body.Price,
     "Genre": req.body.Genre,
 });
-
+//create a new book entry
 book.create(newBook,(err, books) => {
     if(err){
         console.log(err);
@@ -55,7 +55,7 @@ book.create(newBook,(err, books) => {
 // GET the Book Details page in order to edit an existing Book
 router.get('/edit/:id', (req, res, next) => {
   let id = req.params.id;
-
+//find the book to be edited
   book.findById(id, (err, bookToEdit) => {
       if(err){
           console.log(err);
@@ -83,7 +83,7 @@ router.post('/edit/:id', (req, res, next) => {
       "Price": req.body.Price,
       "Genre": req.body.Genre,     
   });
-
+//update book
   book.updateOne({_id: id}, updateBook, (err) => {
       if(err){
           console.log(err);
@@ -101,9 +101,9 @@ router.post('/edit/:id', (req, res, next) => {
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
 
-  let id = req.params.id
-
-  Book.deleteOne({_id: id}, (err) => {
+  let id = req.params.id;
+//deletion of book
+  book.deleteOne({_id: id}, (err) => {
       if(err){
           console.log(err);
           res.end(err);
