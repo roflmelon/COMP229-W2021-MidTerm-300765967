@@ -25,36 +25,78 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
-
+//added link to book details
+  res.render('books/details', {title: 'Add Book'});
 });
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let newBook = book({
+    "Title": req.body.Title,
+    "Author": req.body.Author,
+    "Price": req.body.Price,
+    "Genre": req.body.Genre,
+});
+
+book.create(newBook,(err, books) => {
+    if(err){
+        console.log(err);
+        res.end(err);
+    }
+    else
+    {
+        //refresh book list
+        res.redirect('/books');
+    }
+})
 
 });
 
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+
+  Book.findById(id, (err, bookEdit) => {
+      if(err){
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          // show the edit view
+          res.render('books/edit', {
+              title: 'Edit Book Details', book: bookEdit
+          })
+      }
+  });
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
 
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+
+  let updateBook = book({
+      "_id": id,
+      "Title": req.body.Title,
+      "Author": req.body.Author,
+      "Price": req.body.Price,
+      "Genre": req.body.Genre,     
+  });
+
+  book.updateOne({_id: id}, updateBook, (err) => {
+      if(err){
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          // refresh the book list
+          res.redirect('/books');
+      }
+  });
 
 });
 
